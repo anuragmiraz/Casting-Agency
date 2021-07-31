@@ -5,7 +5,6 @@ import json
 
 # database_path = os.environ.get('DATABASE_URL')
 database_path = 'postgresql://postgres:doublea@localhost:5432/casting_agency'
-# database_path = 'postgres://rreakxlnuymdsk:172a4e1da231026e08fb09d4c80f3231b7e6b08cbbd3b1dfd8844421fbf98ec6@ec2-52-23-40-80.compute-1.amazonaws.com:5432/d93bv217jfk5vh'
 
 db = SQLAlchemy()
 
@@ -18,7 +17,7 @@ def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
-    db.drop_all()
+#     db.drop_all()
     db.create_all()
 
 '''
@@ -68,7 +67,7 @@ class Movies(db.Model):
   def __init__(self, title, release_date):
     self.title = title
     self.release_date = release_date
-    
+
   def insert(self):
     db.session.add(self)
     db.session.commit()

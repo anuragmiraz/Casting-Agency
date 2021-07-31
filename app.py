@@ -1,10 +1,9 @@
 import os
 from flask import Flask, request, abort, jsonify
-from flask_sqlalchemy import SQLAlchemy, exc
+from flask_sqlalchemy import SQLAlchemy
+import json
+from sqlalchemy import exc
 from flask_cors import CORS
-# from .database.models import db_drop_and_create_all, setup_db, Drink
-# from models import db_drop_and_create_all, setup_db, Actors, Movies
-# from .auth.auth import AuthError, requires_auth
 from auth import AuthError, requires_auth
 from models import setup_db, Movies, Actors
 
@@ -20,7 +19,6 @@ APP = create_app()
 app = Flask(__name__)
 setup_db(app)
 CORS(app)
-
 
 # ROUTES
 '''
@@ -39,14 +37,12 @@ def display_actors():
 
     try:
 
-#        actors = [actor.short() for actor in actors]
-
         if len(actors) == 0:
             abort(404)
         else:
             return jsonify({
                 'success': True,
-                'actors': actors
+                'actors':[actor.format() for actor in actors]
             }), 200
 
     except BaseException:
@@ -68,14 +64,12 @@ def display_movies():
 
     try:
 
-#        movies = [movie.short() for movie in movies]
-
         if len(movies) == 0:
             abort(404)
         else:
             return jsonify({
                 'success': True,
-                'movies': movies
+                'movies':[movie.format() for movie in movies]
             }), 200
 
     except BaseException:
@@ -89,27 +83,24 @@ def display_movies():
      where actors is the list of actors
         or appropriate status code indicating reason for failure
 '''
-'''
-@app.route('/actors-details', methods=['GET'])
+
+@app.route('/actors-details/<int:id>', methods=['GET'])
 @requires_auth('get:actors-details')
-def display_actors_details(payload):
+def display_actors_details(payload, id):
 
     actors = Actors.query.order_by(Actors.id).all()
     try:
-
-#        actors = [actor.long() for actor in actors]
 
         if len(actors) == 0:
             abort(404)
         else:
             return jsonify({
                 'success': True,
-                'actors': actors
+                'actors':[actor.format() for actor in actors]
             }), 200
 
     except BaseException:
         abort(400)
-'''
 
 '''
 @TODO implement endpoint
@@ -120,27 +111,23 @@ def display_actors_details(payload):
         or appropriate status code indicating reason for failure
 '''
 
-'''
-@app.route('/movies-details', methods=['GET'])
+@app.route('/movies-details/<int:id>', methods=['GET'])
 @requires_auth('get:movies-details')
-def display_movies_details(payload):
+def display_movies_details(payload, id):
 
     movies = Movies.query.order_by(Movies.id).all()
     try:
-
-#        movies = [movie.long() for movie in movies]
 
         if len(movies) == 0:
             abort(404)
         else:
             return jsonify({
                 'success': True,
-                'movies': movies
+                'movies':[movie.format() for movie in movies]
             }), 200
 
     except BaseException:
         abort(400)
-'''
 
 '''
 @TODO implement endpoint
@@ -156,9 +143,11 @@ def display_movies_details(payload):
 @requires_auth('post:actors')
 def create_actors(payload):
 
-    new_name = request.json.get('name', None)
-    new_age = request.json.get('age', None)
-    new_gender = request.json.get('gender', None)
+    new_name = request.form.get('name', None)
+    new_age = request.form.get('age', None)
+    new_gender = request.form.get('gender', None)
+
+    print(new_name)
 
     if new_name is None:
         abort(422)
@@ -171,8 +160,7 @@ def create_actors(payload):
     actors.insert()
 
     return jsonify({
-        'success': True,
-#         'actors': [actors.long()]
+        'success': True
     }), 200
 
 
@@ -190,8 +178,8 @@ def create_actors(payload):
 @requires_auth('post:movies')
 def create_movies(payload):
 
-    new_title = request.json.get('title', None)
-    new_release_date = request.json.get('release_date', None)
+    new_title = request.form.get('title', None)
+    new_release_date = request.form.get('release_date', None)
 
     if new_title is None:
         abort(422)
@@ -202,8 +190,7 @@ def create_movies(payload):
     movies.insert()
 
     return jsonify({
-        'success': True,
-#         'movies': [movies.long()]
+        'success': True
     }), 200
 
 
@@ -215,7 +202,7 @@ def create_movies(payload):
         it should update the corresponding row for <id>
         it should require the 'patch:actors' permission
     returns status code 200 and json {"success": True, "actors": actor}
-     where actor an array containing only the updated drink
+     where actor an array containing only the updated actor
         or appropriate status code indicating reason for failure
 '''
 
@@ -223,7 +210,6 @@ def create_movies(payload):
 @requires_auth('patch:actors')
 def modify_actors(payload, id):
 
-    body = request.get_json()
     actors = Actors.query.filter(Actors.id == id).one_or_none()
     old_name = Actors.name
     old_age = Actors.age
@@ -233,28 +219,32 @@ def modify_actors(payload, id):
         abort(404)
     else:
         try:
-            if 'name' in body:
-                actors.name = body.get('name')
+            new_name = request.form.get('name', None)
+            new_age = request.form.get('age', None)
+            new_gender = request.form.get('gender', None)
+
+            if new_name is not None:
+                actors.name = new_name
             else:
                 actors.name = old_name
-            if 'age' in body:
-                actors.age = body.get('age')
+            
+            if new_age is not None:
+                actors.age = new_age
             else:
                 actors.age = old_age
-            if 'gender' in body:
-                actors.gender = body.get('gender')
+            
+            if new_gender is not None:
+                actors.gender = new_gender
             else:
                 actors.gender = old_gender
 
             actors.update()
 
             return jsonify({
-                'success': True,
-#                 'actors': [actors.long()]
-            })
+                'success': True
+            }), 200
         except BaseException:
-            abort(400)
-
+            abort(422)
 
 '''
 @TODO implement endpoint
@@ -272,8 +262,8 @@ def modify_actors(payload, id):
 @requires_auth('patch:movies')
 def modify_movies(payload, id):
     
-    body = request.get_json()
     movies = Movies.query.filter(Movies.id == id).one_or_none()
+    
     old_title = Movies.title
     old_release_date = Movies.release_date
 
@@ -281,23 +271,27 @@ def modify_movies(payload, id):
         abort(404)
     else:
         try:
-            if 'title' in body:
-                movies.title = body.get('title')
+
+            new_title = request.form.get('title', None)
+            new_release_date = request.form.get('release_date', None)
+
+            if new_title is not None:
+                movies.title = new_title
             else:
-                movies.title = old_title
-            if 'release_date' in body:
-                movies.release_date = body.get('release_Date')
+                movies.movies = old_title
+    
+            if new_release_date is not None:
+                movies.release_date = new_release_date
             else:
                 movies.release_date = old_release_date
 
             movies.update()
 
             return jsonify({
-                'success': True,
-#                 'movies': [movies.long()]
-            })
+                'success': True
+            }), 200
         except BaseException:
-            abort(400)
+            abort(422)
 
 
 '''
@@ -324,9 +318,8 @@ def delete_actors(payload, id):
         else:
             actors.delete()
             return jsonify({
-                'success': True,
-                'delete': actors.id,
-            })
+                'success': True
+            }), 200
 
     except BaseException:
         abort(422)
@@ -355,36 +348,14 @@ def delete_movies(payload, id):
         else:
             movies.delete()
             return jsonify({
-                'success': True,
-                'delete': movies.id,
-            })
+                'success': True
+            }), 200
 
     except BaseException:
         abort(422)
 
 
 # Error Handling
-'''
-Example error handling for unprocessable entity
-'''
-
-@app.errorhandler(422)
-def unprocessable(error):
-    return jsonify({
-        "success": False,
-        "error": 422,
-        "message": "unprocessable"
-    }), 422
-
-
-@app.errorhandler(404)
-def unprocessable(error):
-    return jsonify({
-        "success": False,
-        "error": 404,
-        "message": "resource not found"
-    }), 404
-
 
 @app.errorhandler(400)
 def unprocessable(error):
@@ -394,11 +365,21 @@ def unprocessable(error):
         "message": "bad request"
     }), 400
 
+@app.errorhandler(404)
+def unprocessable(error):
+    return jsonify({
+        "success": False,
+        "error": 404,
+        "message": "resource not found"
+    }), 404
 
-'''
-@TODO implement error handler for AuthError
-    error handler should conform to general task above
-'''
+@app.errorhandler(422)
+def unprocessable(error):
+    return jsonify({
+        "success": False,
+        "error": 422,
+        "message": "unprocessable"
+    }), 422
 
 @app.errorhandler(AuthError)
 def auth_error(error):
