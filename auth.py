@@ -1,12 +1,17 @@
+import os
 import json
 from flask import request, _request_ctx_stack
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 
-AUTH0_DOMAIN = 'anuragmiraz.us.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'API'
+from dotenv import load_dotenv
+load_dotenv()
+
+AUTH0_DOMAIN = os.getenv("AUTH0_DOM")
+ALGORITHMS = os.getenv("ALGORITH")
+API_AUDIENCE = os.getenv("API_AUD")
+
 # AuthError Exception
 '''
 '/AuthError Exception

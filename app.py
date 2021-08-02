@@ -147,8 +147,6 @@ def create_actors(payload):
     new_age = request.form.get('age', None)
     new_gender = request.form.get('gender', None)
 
-    print(new_name)
-
     if new_name is None:
         abort(422)
     if new_age is None:

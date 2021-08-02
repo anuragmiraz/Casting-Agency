@@ -2,7 +2,7 @@ import os
 import unittest
 import json
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_migrate import Migrate
 from app import create_app
 from models import setup_db, Actors, Movies
 
@@ -17,7 +17,7 @@ class FinalTestCase(unittest.TestCase):
         self.app = create_app()
         self.client = self.app.test_client
 
-        db_name = "casting_agency"
+        db_name = os.getenv("DATABASE_NAME")  
         db_host = os.getenv("DATABASE_HOST")  
         db_user = os.getenv("DATABASE_USER")
         db_password = os.getenv("DATABASE_PASSWORD")

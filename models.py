@@ -2,11 +2,15 @@ import os
 from sqlalchemy import Column, String, Integer, create_engine, Date
 from flask_sqlalchemy import SQLAlchemy
 import json
+from flask_moment import Moment
 
-# database_path = os.environ.get('DATABASE_URL')
-database_path = 'postgresql://postgres:doublea@localhost:5432/casting_agency'
+from dotenv import load_dotenv
+load_dotenv()
+
+database_path = os.getenv('DATABASE_PAT')
 
 db = SQLAlchemy()
+moment = Moment()
 
 '''
 setup_db(app)
@@ -16,8 +20,9 @@ def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
+    moment.app = app
     db.init_app(app)
-#     db.drop_all()
+#    db.drop_all()
     db.create_all()
 
 '''
