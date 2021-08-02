@@ -4,6 +4,7 @@ import json
 from flask_sqlalchemy import SQLAlchemy
 from app import create_app
 from models import setup_db, Actors, Movies
+import sys, json
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -30,7 +31,7 @@ class TriviaTestCase(unittest.TestCase):
 
     def test_get_categories_results(self):
         res = self.client().get('/actors')
-        data = json.loads(res.data)
+        data = json.load(res.data)
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)

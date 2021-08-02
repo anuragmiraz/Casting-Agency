@@ -7,7 +7,7 @@ from flask_moment import Moment
 from dotenv import load_dotenv
 load_dotenv()
 
-database_path = os.getenv('DATABASE_PAT')
+database_path = os.getenv('DATABASE_URL')
 
 db = SQLAlchemy()
 moment = Moment()
