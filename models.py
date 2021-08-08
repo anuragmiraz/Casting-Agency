@@ -3,6 +3,7 @@ from sqlalchemy import Column, String, Integer, create_engine, Date
 from flask_sqlalchemy import SQLAlchemy
 import json
 from flask_moment import Moment
+from flask_migrate import Migrate, MigrateCommand
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -22,8 +23,7 @@ def setup_db(app, database_path=database_path):
     db.app = app
     moment.app = app
     db.init_app(app)
-#    db.drop_all()
-    db.create_all()
+    migrate = Migrate(app, db)
 
 '''
 Actor

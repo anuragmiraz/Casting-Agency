@@ -130,7 +130,7 @@ python -m flask run
 
 The application will run on http://127.0.0.1:5000/ by default and is a proxy in the frontend configuration.
 
-Heroku address: https://aa-casting-agency.herokuapp.com/
+Heroku address: https://anuragmiraz.herokuapp.com/
 
 ### Step 4 - Authentication and authorization
 
@@ -301,14 +301,7 @@ PATCH '/movies/${id}'
 
 ## Open Issues
 
-There are 2 open issues at the moment in this project. These are :
-
-Issue 1 - The application is running fine locally. It is successfully tested using postman. However, while hosting the same on heroku, i am facing some issues. Even after following the suggestions given by mentor, i am unable to run the applicaiton. For more details, refer below link :
-https://knowledge.udacity.com/questions/648222
-
-Issue 2 - All test cases are running find using postman. However, the same are not running using the test_app module.
-https://knowledge.udacity.com/questions/655502
-
+None
 
 ## Acknowledgements
 I would like to pass my sincere thanks to my mentor Dharini for giving me right guidance whenever i needed. Also, to Udacity team members who really helped me alot in solving my problems and giving  wonderful sessions.
