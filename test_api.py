@@ -95,7 +95,7 @@ class CastingTestCase(unittest.TestCase):
 
     def test_get_actors_det_results(self):
         try:
-            res = self.client().get('/actors-details/3', 
+            res = self.client().get('/actors-details/1',
             headers=self.producer)
             data = json.loads(res.data)
 
@@ -122,7 +122,7 @@ class CastingTestCase(unittest.TestCase):
 
     def test_get_movies_results(self):
         try:
-            res = self.client().get('/movies-details/4',
+            res = self.client().get('/movies-details/2',
             headers=self.producer)
             data = json.loads(res.data)
 
@@ -200,7 +200,7 @@ class CastingTestCase(unittest.TestCase):
 
     def test_update_actor(self):
         try:
-            res = self.client().patch('/actors/3', json=self.upd_actors,
+            res = self.client().patch('/actors/5', json=self.upd_actors,
             headers=self.producer)
             data = json.loads(res.data)
 
@@ -252,7 +252,7 @@ class CastingTestCase(unittest.TestCase):
 
     def test_delete_actors(self):
         try:
-            res = self.client().delete('/actors/6',
+            res = self.client().delete('/actors/10',
             headers=self.producer)
             data = json.loads(res.data)
 
@@ -279,7 +279,7 @@ class CastingTestCase(unittest.TestCase):
 
     def test_delete_movies(self):
         try:
-            res = self.client().delete('/movies/4',
+            res = self.client().delete('/movies/7',
             headers=self.producer)
             data = json.loads(res.data)
 
@@ -306,7 +306,7 @@ class CastingTestCase(unittest.TestCase):
 
     def test_get_actors_results_asst(self):
         try:
-            res = self.client().get('/actors-details/3', 
+            res = self.client().get('/actors-details/1', 
             headers=self.assistant)
             data = json.loads(res.data)
 
@@ -320,7 +320,7 @@ class CastingTestCase(unittest.TestCase):
 
     def test_get_actors_results_dirc(self):
         try:
-            res = self.client().get('/actors-details/3', 
+            res = self.client().get('/actors-details/1', 
             headers=self.director)
             data = json.loads(res.data)
 
@@ -334,7 +334,7 @@ class CastingTestCase(unittest.TestCase):
 
     def test_get_actors_results(self):
         try:
-            res = self.client().get('/actors-details/3', 
+            res = self.client().get('/actors-details/1', 
             headers=self.producer)
             data = json.loads(res.data)
 

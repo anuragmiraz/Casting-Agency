@@ -7,6 +7,7 @@ from flask_cors import CORS
 from auth import AuthError, requires_auth
 from models import setup_db, Movies, Actors
 
+
 def create_app(test_config=None):
     # create and configure the app
 
@@ -20,8 +21,9 @@ def create_app(test_config=None):
 
     @app.after_request
     def after_request(response):
-        response.headers.add('Access-Control-Allow-Headers',
-                             'Content-Type: application/json, Authorization,true')
+        response.headers.add(
+            'Access-Control-Allow-Headers',
+            'Content-Type: application/json, Authorization,true')
         response.headers.add('Access-Control-Allow-Methods',
                              'GET, POST, PATCH, DELETE, OPTIONS')
         return response
@@ -38,7 +40,7 @@ def create_app(test_config=None):
             else:
                 return jsonify({
                     'success': True,
-                    'actors':[actor.format() for actor in actors]
+                    'actors': [actor.format() for actor in actors]
                 }), 200
 
         except BaseException:
@@ -65,7 +67,7 @@ def create_app(test_config=None):
             else:
                 return jsonify({
                     'success': True,
-                    'movies':[movie.format() for movie in movies]
+                    'movies': [movie.format() for movie in movies]
                 }), 200
 
         except BaseException:
@@ -83,7 +85,7 @@ def create_app(test_config=None):
     @app.route('/actors-details/<int:id>', methods=['GET'])
     @requires_auth('get:actors-details')
     def display_actors_details(payload, id):
-        
+
         actors = Actors.query.filter(Actors.id == id).one_or_none()
 
         if actors is None:
@@ -150,7 +152,6 @@ def create_app(test_config=None):
             'success': True
         }), 200
 
-
     '''
     @TODO implement endpoint
         POST /movies
@@ -181,7 +182,6 @@ def create_app(test_config=None):
             'success': True
         }), 200
 
-
     '''
     @TODO implement endpoint
         PATCH /actors/<id>
@@ -207,7 +207,7 @@ def create_app(test_config=None):
             abort(404)
         else:
             try:
-                
+
                 body = request.get_json(force=True)
 
                 new_name = body.get('name', None)
@@ -218,12 +218,12 @@ def create_app(test_config=None):
                     actors.name = new_name
                 else:
                     actors.name = old_name
-                
+
                 if new_age is not None:
                     actors.age = new_age
                 else:
                     actors.age = old_age
-                
+
                 if new_gender is not None:
                     actors.gender = new_gender
                 else:
@@ -252,9 +252,9 @@ def create_app(test_config=None):
     @app.route('/movies/<int:id>', methods=['PATCH'])
     @requires_auth('patch:movies')
     def modify_movies(payload, id):
-        
+
         movies = Movies.query.filter(Movies.id == id).one_or_none()
-        
+
         old_title = Movies.title
         old_release_date = Movies.release_date
 
@@ -271,7 +271,7 @@ def create_app(test_config=None):
                     movies.title = new_title
                 else:
                     movies.movies = old_title
-        
+
                 if new_release_date is not None:
                     movies.release_date = new_release_date
                 else:
@@ -284,7 +284,6 @@ def create_app(test_config=None):
                 }), 200
             except BaseException:
                 abort(422)
-
 
     '''
     @TODO implement endpoint
@@ -373,6 +372,7 @@ def create_app(test_config=None):
         }), error.status_code
 
     return app
+
 
 APP = create_app()
 

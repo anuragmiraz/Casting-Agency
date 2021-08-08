@@ -97,8 +97,7 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -108,7 +107,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/actors-details/2",
+							"raw": "http://127.0.0.1:5000/actors-details/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -119,7 +118,7 @@
 							"port": "5000",
 							"path": [
 								"actors-details",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -181,24 +180,8 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "Ayaansh",
-									"type": "text"
-								},
-								{
-									"key": "age",
-									"value": "03",
-									"type": "text"
-								},
-								{
-									"key": "gender",
-									"value": "M",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test 2\",\r\n    \"age\": 11,\r\n    \"gender\": \"F\"\r\n}"
 						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/actors",
@@ -237,17 +220,11 @@
 						"method": "PATCH",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "Anurag",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tesssssst\"\r\n}"
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/actors/2",
+							"raw": "http://127.0.0.1:5000/actors/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -258,7 +235,7 @@
 							"port": "5000",
 							"path": [
 								"actors",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -283,7 +260,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/movies/1",
+							"raw": "http://127.0.0.1:5000/movies/3",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -294,7 +271,7 @@
 							"port": "5000",
 							"path": [
 								"movies",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -320,19 +297,8 @@
 						"method": "PATCH",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "title",
-									"value": "AA",
-									"type": "text"
-								},
-								{
-									"key": "release_date",
-									"value": "2021-03-04",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"test\"\r\n}"
 						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/movies/2",
@@ -371,19 +337,8 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "title",
-									"value": "MAi hoon Na",
-									"type": "text"
-								},
-								{
-									"key": "release_date",
-									"value": "2021-02-02",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"test 2\",\r\n    \"release_date\": \"2021-02-02\"\r\n}"
 						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/movies",
@@ -421,7 +376,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/actors/1",
+							"raw": "http://127.0.0.1:5000/actors/3",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -432,11 +387,41 @@
 							"port": "5000",
 							"path": [
 								"actors",
-								"1"
+								"3"
 							]
 						}
 					},
 					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImFlTUg4Z1Z4SHU0SG1uaHpHMWQ3bSJ9.eyJpc3MiOiJodHRwczovL2FudXJhZ21pcmF6LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MGMzYWQ2ZjM0OGVkYzAwNmEyMWE2ZDYiLCJhdWQiOiJBUEkiLCJpYXQiOjE2Mjg0Mzg1NDAsImV4cCI6MTYyODQ0NTc0MCwiYXpwIjoidXk1QVYydEdsZ0lqT3pyOGdSUFlYZE1hVWlFSWFQWU0iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6bW92aWVzIiwiZ2V0OmFjdG9ycyIsImdldDphY3RvcnMtZGV0YWlscyIsImdldDptb3ZpZXMiLCJnZXQ6bW92aWVzLWRldGFpbHMiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q6bW92aWVzIl19.TPgKOY-0PC6OGIRVFps2BLfDbYCtd6CdPUqGRNzs0akHigBi04Tbc5LJmxl-sRQ8Ln7Os2lGej5H_e_CA8im7V1eRotDADJNTmsblD9eXOCMyvMeoDdBPCJ6z4jbJ6GY7KBZPtfonF8RrGjIMygAJ2uMpDLa6wEUW4eb-yECG2HjitmItCZ7c0GyeRR-uipFUb6cOUrozyZ4j1wpaQGnEz9sdrjyauBZfZkMxhID_JKyyeOE5nF0XfJCpPgYTAtsnwXrTwUDp4DmwLLMcFlnhQenB8Udibmq_gv6ZAfgG_wWmnCPEzKlryjmXOa5pFa5-hjA1rb3aCD4wXpfoN9KaQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -543,7 +528,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/actors-details/2",
+							"raw": "http://127.0.0.1:5000/actors-details/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -554,7 +539,7 @@
 							"port": "5000",
 							"path": [
 								"actors-details",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -616,24 +601,8 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "Modi",
-									"type": "text"
-								},
-								{
-									"key": "age",
-									"value": "75",
-									"type": "text"
-								},
-								{
-									"key": "gender",
-									"value": "M",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test 2\",\r\n    \"age\": 11,\r\n    \"gender\": \"F\"\r\n}"
 						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/actors",
@@ -671,14 +640,8 @@
 						"method": "PATCH",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "Anurag",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test 2\",\r\n}"
 						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/actors/2",
@@ -753,19 +716,8 @@
 						"method": "PATCH",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "title",
-									"value": "AA",
-									"type": "text"
-								},
-								{
-									"key": "release_date",
-									"value": "2021-03-04",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Test 2\",\r\n}"
 						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/movies/2",
@@ -804,19 +756,8 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "title",
-									"value": "MAi hoon Na",
-									"type": "text"
-								},
-								{
-									"key": "release_date",
-									"value": "2021-02-02",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"test movie\",\r\n    \"release_date\": \"2021-02-02\"\r\n}"
 						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/movies",
@@ -877,7 +818,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImFlTUg4Z1Z4SHU0SG1uaHpHMWQ3bSJ9.eyJpc3MiOiJodHRwczovL2FudXJhZ21pcmF6LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MGZjMzJjMjI0NTRmMjAwNmEyMzJmMTgiLCJhdWQiOiJBUEkiLCJpYXQiOjE2Mjc2NjM1MTMsImV4cCI6MTYyNzY3MDcxMywiYXpwIjoidXk1QVYydEdsZ0lqT3pyOGdSUFlYZE1hVWlFSWFQWU0iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMiLCJnZXQ6YWN0b3JzLWRldGFpbHMiLCJnZXQ6bW92aWVzIiwiZ2V0Om1vdmllcy1kZXRhaWxzIl19.UXccmcpUZf275tFr-MnfRkbMtfWv3zLOjl6DFKykdR4xDe7FsL1NRniT-ywM-wC0HeOt8muNzwZinEbFzu3YEq6bghu2o269AJ5zd-OLvSeNfWiQ2dsbJqe2fWp5oAfgrTOxURht62eHcf8mQFlecVF5ahzcTZUVupeUnXe2L_4iI9lB-fG_5dwAz-erMziJZPCzu3ADDxxpybS-QrrvKz5AAPXeaxdiey1VuoTCyW75sg53tD4axYR_Bp1ZzXzqhtn04f42a2MvMj36nmQVo5IpubQVTCkPyDjTxgp9TtCfRSftpzSOQcvhuNUCL41ORgLGO9DBdberfwZYVJACGg",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImFlTUg4Z1Z4SHU0SG1uaHpHMWQ3bSJ9.eyJpc3MiOiJodHRwczovL2FudXJhZ21pcmF6LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MGZjMzJjMjI0NTRmMjAwNmEyMzJmMTgiLCJhdWQiOiJBUEkiLCJpYXQiOjE2Mjg0Mzg0OTQsImV4cCI6MTYyODQ0NTY5NCwiYXpwIjoidXk1QVYydEdsZ0lqT3pyOGdSUFlYZE1hVWlFSWFQWU0iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMiLCJnZXQ6YWN0b3JzLWRldGFpbHMiLCJnZXQ6bW92aWVzIiwiZ2V0Om1vdmllcy1kZXRhaWxzIl19.LDA1nJdn9oAbFO3_oCu4Ao594fSjze49yVGk7udtffwhVhGE9jQ9u6tS35ftkg650gxCdglC6GNM4S6KiLDJOCDeRaMkZG6ZbjKfzdlXzPfcUTYlFpn721zyAun72ZYo11L1JqoLFNh4PfdXCV9xezBK89x-94Yf3jPLPcHet4q9kcB1XAnX3xzA5av1bOWM4_1Xn5ZgmbqjZLx73p3lYn7EXMaC6QLvd_-5FGPrHJfWU32BoIWp7DYHmxuG-dZFtdk6zeb9GUHoZqE_O0_e5cxu0eDdX2iX2418E5T9iieytbcDY7BCxHvRklCj1d8bYvud5Qn9b0c2NzW3C2w5AA",
 						"type": "string"
 					}
 				]
@@ -1006,7 +947,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/actors-details/2",
+							"raw": "http://127.0.0.1:5000/actors-details/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1017,7 +958,7 @@
 							"port": "5000",
 							"path": [
 								"actors-details",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -1079,24 +1020,8 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "Modi",
-									"type": "text"
-								},
-								{
-									"key": "age",
-									"value": "75",
-									"type": "text"
-								},
-								{
-									"key": "gender",
-									"value": "M",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Modi\",\r\n    \"age\": 65,\r\n    \"gender\": \"M\"\r\n}"
 						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/actors",
@@ -1135,14 +1060,8 @@
 						"method": "PATCH",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "AAAA",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test 4\",\r\n    \"age\": 141,\r\n    \"gender\": \"F\"\r\n}"
 						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/actors/4",
@@ -1218,19 +1137,8 @@
 						"method": "PATCH",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "title",
-									"value": "SSS",
-									"type": "text"
-								},
-								{
-									"key": "release_date",
-									"value": "2021-03-04",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"dragon\"\r\n}"
 						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/movies/2",
@@ -1269,19 +1177,8 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "title",
-									"value": "MAi hoon Na",
-									"type": "text"
-								},
-								{
-									"key": "release_date",
-									"value": "2021-02-02",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Test 6\",\r\n    \"release_date\": \"2021-04-05\"\r\n}"
 						},
 						"url": {
 							"raw": "http://127.0.0.1:5000/movies",
@@ -1342,7 +1239,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImFlTUg4Z1Z4SHU0SG1uaHpHMWQ3bSJ9.eyJpc3MiOiJodHRwczovL2FudXJhZ21pcmF6LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MGMzYWQzOTM0OGVkYzAwNmEyMWE2YjUiLCJhdWQiOiJBUEkiLCJpYXQiOjE2Mjc2NjM0NjMsImV4cCI6MTYyNzY3MDY2MywiYXpwIjoidXk1QVYydEdsZ0lqT3pyOGdSUFlYZE1hVWlFSWFQWU0iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0b3JzIiwiZ2V0OmFjdG9ycy1kZXRhaWxzIiwiZ2V0Om1vdmllcyIsImdldDptb3ZpZXMtZGV0YWlscyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIl19.L_7btp4KzSI9TNbdZtMJmSTF1XlRQGgm-ZX1MVXW1rJTFtYUoqu3_qXsr-3CSqH2ZD3NzRnwL0oUJl_NWo54UxNMl3WYXYQIqgdME7vBA-nhtmkeprFoMAILH1RhJuQODWwAYcS0OCWkNW7yGTtD_-SfFoKTrlU5seaMvU5KLsFKquoLuRPYl6WI-DUwuI6yJbFEL0TtWqeLj2VhGHm671WX9yYS0qHpt3h6O-b8blxrwKS696xAUQndIGwHYYtj6A2EjPLk72CQ6quNTxRDntLsRFPWIPjzN_hG_q2GjyCaB7KstgGxNFxskfwvcZ8t0j1viNR-iCCavkWhvnuoXg",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImFlTUg4Z1Z4SHU0SG1uaHpHMWQ3bSJ9.eyJpc3MiOiJodHRwczovL2FudXJhZ21pcmF6LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MGMzYWQzOTM0OGVkYzAwNmEyMWE2YjUiLCJhdWQiOiJBUEkiLCJpYXQiOjE2Mjg0Mzg0NDksImV4cCI6MTYyODQ0NTY0OSwiYXpwIjoidXk1QVYydEdsZ0lqT3pyOGdSUFlYZE1hVWlFSWFQWU0iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0b3JzIiwiZ2V0OmFjdG9ycy1kZXRhaWxzIiwiZ2V0Om1vdmllcyIsImdldDptb3ZpZXMtZGV0YWlscyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIl19.JiUEHsPFgUWCRs2n4GnR6-dHWXnXYPOJ-_VVStcjf1jQKiS8hbTToM3kFMu512iZFskRaJaquQ-yDnE3RBcrqS4MbMi1rwFx1XVkt1zXaq5zxzgzgDOiI5iDdyj3KhcGhED2QTvifEvV-ZwMtBD3ccRXMoUp3ZD8dQ201M6lW4ULbNk5MkpDuXmJrnNPqT2OGBu4gQAbbfMVRHl_taO26K4Fu_ZppqSU-FMc5laIRPcLoVgUP48wYgTf3yPkeKcA_q-tlUKggBp4CJfernrYdS_0xAPtYRcra8_yUyCGZisN3lgt94twLQDaPezowbBgda4pshzgYml8I0HpKQ6W5g",
 						"type": "string"
 					}
 				]
